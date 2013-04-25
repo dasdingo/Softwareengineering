@@ -65,7 +65,7 @@ public class AddressListView extends JFrame implements Observer{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				EmailonlyAddress address = new EmailonlyAddress();
-				new AddressView(address, alv);
+				new EmailAddressView(address, alv);
 			}
 		});
 		addPostalAddressButton.addActionListener(new ActionListener() {

@@ -2,7 +2,7 @@ package model;
 
 import java.io.Serializable;
 
-public class EmailonlyAddress extends AbstractAddress implements Serializable {
+public class EmailonlyAddress extends AbstractAddress {
 
 	private static final long serialVersionUID = 6780532528672421304L;
 

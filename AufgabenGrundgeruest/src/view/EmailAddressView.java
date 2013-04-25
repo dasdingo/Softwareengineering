@@ -13,32 +13,32 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import model.AbstractAddress;
 import model.EmailonlyAddress;
 import model.AddressList;
 
 @SuppressWarnings("serial")
-public class AddressView extends AbstractAddressView {
+public class EmailAddressView extends AbstractAddressView {
 
-	private EmailonlyAddress address;
-	private AddressList addressList;
+	protected EmailonlyAddress address;
 
 	private JTextField nameTextField;
 	private JTextField emailaddressTextField;
 
-	public AddressView(EmailonlyAddress address, AddressList addressList) {
+	public EmailAddressView(EmailonlyAddress address, AddressList addressList) {
 		this.address = address;
 		this.addressList = addressList;
-		init();
+		initabstract();
 		populateFields();
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
 	}
 
-	private void init() {
+	protected void init() {
 		this.setTitle("Address");
 		this.setLayout(new BorderLayout());
 
-		JPanel upperPanel = new JPanel();
+		
 		upperPanel.setBorder(BorderFactory.createTitledBorder("Addressinformationen"));
 
 		upperPanel.setLayout(new GridLayout(2, 2, 5, 5));
@@ -55,8 +55,6 @@ public class AddressView extends AbstractAddressView {
 		upperPanel.add(emailaddressTextField);
 
 		this.add(upperPanel, BorderLayout.CENTER);
-
-		JButton speicherButton = new JButton("Hinterlegen");
 
 		speicherButton.addActionListener(new ActionListener() {
 			/**

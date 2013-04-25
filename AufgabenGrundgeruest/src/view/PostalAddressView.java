@@ -13,14 +13,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import model.AbstractAddress;
 import model.AddressList;
 import model.EmailonlyAddress;
 import model.PostalAddress;
 
 public class PostalAddressView extends AbstractAddressView{
 
-	private PostalAddress address;
-	private AddressList addressList;
+	protected PostalAddress address;
 
 	private JTextField nameTextField;
 	private JTextField emailaddressTextField;
@@ -32,18 +32,18 @@ public class PostalAddressView extends AbstractAddressView{
 	public PostalAddressView(PostalAddress address, AddressList addressList) {
 		this.address = address;
 		this.addressList = addressList;
-		init();
+		initabstract();
 		populateFields();
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
 	}
 
-	private void init() {
+	protected void init() {
 		this.setTitle("Address");
 		this.setLayout(new BorderLayout());
 
-		JPanel upperPanel = new JPanel();
-		upperPanel.setBorder(BorderFactory.createTitledBorder("Addressinformationen"));
+		
+		upperPanel.setBorder(BorderFactory.createTitledBorder("Postanschrift"));
 
 		upperPanel.setLayout(new GridLayout(0, 2, 2, 2));
 
@@ -51,13 +51,13 @@ public class PostalAddressView extends AbstractAddressView{
 		nameTextField = new JTextField();
 		JLabel emailaddressLabel = new JLabel("Emailadresse");
 		emailaddressTextField = new JTextField();
-		JLabel streetLabel = new JLabel("Name");
+		JLabel streetLabel = new JLabel("Street");
 		streetTextField = new JTextField();
-		JLabel houseNumberLabel = new JLabel("Name");
+		JLabel houseNumberLabel = new JLabel("HousNumber");
 		houseNumberTextField = new JTextField();
-		JLabel postalLabel = new JLabel("Name");
+		JLabel postalLabel = new JLabel("Postal");
 		postalTextField = new JTextField();
-		JLabel locationLabel = new JLabel("Name");
+		JLabel locationLabel = new JLabel("Location");
 		locationTextField = new JTextField();
 		
 
@@ -75,7 +75,7 @@ public class PostalAddressView extends AbstractAddressView{
 		upperPanel.add(locationTextField);
 		this.add(upperPanel, BorderLayout.CENTER);
 
-		JButton speicherButton = new JButton("Hinterlegen");
+		
 
 		speicherButton.addActionListener(new ActionListener() {
 			/**

@@ -19,21 +19,20 @@ import model.EmailonlyAddress;
 
 public abstract class AbstractAddressView extends JFrame{
 	// InstanzVar
-	private AbstractAddress address;
-	private AddressList addressList;
+	
+	protected AddressList addressList;
 	JPanel upperPanel;
 	JButton speicherButton;
 	
 	void initabstract(){
 		this.setLayout(new BorderLayout());
 		upperPanel = new JPanel();
-		upperPanel.setBorder(BorderFactory.createTitledBorder("Addressinformationen"));
-
-		upperPanel.setLayout(new GridLayout(2, 2, 5, 5));	
 		speicherButton = new JButton("Hinterlegen");
+	    init();
 	}
 	
-  
+//FabrikMethode
+protected abstract void init();
 // Fieldsspeichern	
 protected abstract void populateFields();
 

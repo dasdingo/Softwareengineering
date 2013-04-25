@@ -1,7 +1,14 @@
 package model;
 
-public class PostalAddress extends AbstractAddress{
-//Instanzen
+public class PostalAddress extends AbstractAddress {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5628835642710170867L;
+	//Konstanten
+	
+	
+	//Instanzen
 	
 	private String name;
 	private String emailaddress;

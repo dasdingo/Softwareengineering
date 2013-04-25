@@ -1,5 +1,8 @@
 package model;
 
-public abstract class AbstractAddress {
+import java.io.Serializable;
 
+public abstract class AbstractAddress implements Serializable{
+
+	
 }
