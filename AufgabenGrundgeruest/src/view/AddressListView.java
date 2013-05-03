@@ -7,26 +7,36 @@ import java.awt.event.ActionListener;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 
 import model.AbstractAddress;
 import model.AddressList;
 import model.EmailonlyAddress;
+import model.HighBudgetVerhalten;
+import model.LowBudgetVerhalten;
 import model.PostalAddress;
+import model.SendMessageStrategy;
 
 @SuppressWarnings("serial")
 public class AddressListView extends JFrame implements Observer{
 
+	public static int AddressSendCount = 1;
 	private AddressList addressList;
 	private DefaultListModel listModel;
-
+    private SendMessageStrategy SendMessageVerhalten;
 	public AddressListView() {
 		this.addressList = new AddressList();
 		addressList.addObserver(this);
@@ -48,7 +58,7 @@ public class AddressListView extends JFrame implements Observer{
 		constraints.gridwidth = 2;
 		constraints.weighty = 0.9;
 
-		listModel = new DefaultListModel();
+		listModel = new DefaultListModel<AbstractAddress>();
 		JList list = new JList(listModel);
 		JScrollPane scrollpane = new JScrollPane(list);
 
@@ -113,7 +123,48 @@ public class AddressListView extends JFrame implements Observer{
 		constraints.gridx = 1;
 		constraints.gridy = 1;
 		this.add(saveButton, constraints);
-        this.setLocationRelativeTo(null);
+		constraints.gridx = 0; 
+		constraints.gridy = 3;
+		constraints.gridwidth = 2;
+		JPanel strategyPanel = new JPanel();
+		strategyPanel.setBorder(BorderFactory.createTitledBorder("Strategie"));
+		strategyPanel.setLayout(new BoxLayout(strategyPanel, BoxLayout.X_AXIS));
+		final JRadioButton lowBudgetButton = new JRadioButton("Wenig Geld");
+		lowBudgetButton.setSelected(true);
+		strategyPanel.add(lowBudgetButton);
+		JRadioButton highBudgetButton = new JRadioButton("Viel Geld");
+		strategyPanel.add(highBudgetButton);
+		JButton sendButton = new JButton("Nachricht verschicken");
+		sendButton.addActionListener(new ActionListener() {
+		  @Override
+		  public void actionPerformed(ActionEvent e) {
+			 if (lowBudgetButton.isSelected()){
+				for(AbstractAddress address : addressList.getAddressList()){
+				System.out.println(AddressSendCount);
+				AddressSendCount++;
+					address.setSendMessageVerhalten(new LowBudgetVerhalten());	
+					address.nachrichtSenden();
+				}
+			 }
+			 else {
+				 for(AbstractAddress address : addressList.getAddressList()){
+					 System.out.println(AddressSendCount);
+						AddressSendCount++;	
+					 address.setSendMessageVerhalten(new HighBudgetVerhalten());	
+							address.nachrichtSenden();
+						}
+		  }
+		  AddressSendCount = 1;
+		  }});
+		strategyPanel.add(sendButton);
+
+		// Low- und High-Budget Buttons exclusiv verbinden
+		ButtonGroup group = new ButtonGroup();
+		group.add(lowBudgetButton);
+		group.add(highBudgetButton);
+
+		this.add(strategyPanel,constraints);
+		this.setLocationRelativeTo(null);
 		this.pack();
 	}
 

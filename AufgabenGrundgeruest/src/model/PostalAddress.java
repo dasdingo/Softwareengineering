@@ -55,5 +55,14 @@ public class PostalAddress extends AbstractAddress {
 		this.location = location;
 	}
 	
-	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		String eol = System.getProperty("line.separator");  
+		
+		
+		String string=eol +"Name: "+ this.getName()+ eol;
+		string+="Street: "+ this.getStreet()+eol;
+		return (String)string;
+	}
 }
